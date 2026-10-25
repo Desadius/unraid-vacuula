@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Container version="2">
+  <Name>vacuula</Name>
+  <Repository>ghcr.io/vacuula/vacuula:beta</Repository>
+  <Registry>https://github.com/vacuula/vacuula/pkgs/container/vacuula</Registry>
+  <Network>bridge</Network>
+  <MyIP />
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Desadius/unraid-vacuula/issues</Support>
+  <Project>https://github.com/vacuula/vacuula</Project>
+  <Overview>BETA CHANNEL: This template tracks the upstream :beta image. Vacuula is under active development; updates may introduce bugs or breaking changes. Back up /server/data before updating. The beta tag follows new builds when you update the container; it does not enable unattended updates by itself. Self-hosted Vacuula backend for Neato Botvac D3, D4, D5, D6 and D7, with a web app, maps and schedules. Gen4 is disabled in this template. Enroll the robot using the separate Vacuula Installer on a USB-connected computer. The installer modifies robot firmware. Home Assistant is not required.</Overview>
+  <Description>BETA CHANNEL: Updates may introduce bugs, breaking changes or database migrations. Back up the complete appdata folder before updating. An older image may require its matching pre-update data backup if the database format has changed. Bridge networking with two TCP ports: 8088 for the web app and installer, and 335 for Gen3 robot traffic. A custom Docker bridge network may be selected. mDNS is disabled: enter the Unraid LAN IP and published web port as an HTTP URL in the installer. Keep the robot port at 335 on both sides of the mapping. Keep /server/data persistent: it contains the database, maps and the certificate/private key used by your enrolled robot. This is an independently maintained Unraid template for the upstream Vacuula image.</Description>
+  <Category>HomeAutomation:</Category>
+  <Beta>true</Beta>
+  <WebUI>http://[IP]:[PORT:8088]/</WebUI>
+  <Icon>https://raw.githubusercontent.com/vacuula/vacuula/e10c27e1130a4c2417cd9810841edea73ade2250/app/public/icons/icon-vacuula-512.png</Icon>
+  <ExtraParams>--restart unless-stopped --log-driver json-file --log-opt max-size=10m --log-opt max-file=3</ExtraParams>
+  <Config Name="Web UI / installer port" Target="8088" Default="8088" Mode="tcp" Description="Host port for the web app and installer. Change the host port here if 8088 is occupied; keep the internal VACUULA_PORT at 8088." Type="Port" Display="always" Required="true" Mask="false">8088</Config>
+  <Config Name="Neato D3-D7 port" Target="335" Default="335" Mode="tcp" Description="Direct Gen3 robot connection. Keep host and container ports at 335. Do not route this port through an HTTP reverse proxy." Type="Port" Display="always" Required="true" Mask="false">335</Config>
+  <Config Name="Appdata" Target="/server/data" Default="/mnt/user/appdata/vacuula" Mode="rw" Description="Persistent database, maps, robot certificate and private key. Preserve and back up this folder when recreating the container." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/vacuula</Config>
+  <Config Name="Timezone" Target="TZ" Default="Europe/Prague" Mode="" Description="IANA timezone used for cleaning schedules. Change for your location, e.g. Europe/London." Type="Variable" Display="always" Required="true" Mask="false">Europe/Prague</Config>
+  <Config Name="Internal web port" Target="VACUULA_PORT" Default="8088" Mode="" Description="Internal listener. Keep at 8088 to match the Web UI port mapping target." Type="Variable" Display="advanced-hide" Required="true" Mask="false">8088</Config>
+  <Config Name="Internal Gen3 port" Target="GEN3_PORT" Default="335" Mode="" Description="Internal robot listener and port reported to the installer. Must match the direct host port 335." Type="Variable" Display="advanced-hide" Required="true" Mask="false">335</Config>
+  <Config Name="Enable Gen3" Target="GEN3_ENABLED" Default="True" Mode="" Description="Enable Neato D3-D7 support." Type="Variable" Display="advanced-hide" Required="true" Mask="false">True</Config>
+  <Config Name="Enable Gen4" Target="GEN4_ENABLED" Default="False" Mode="" Description="Disabled. This template does not publish the Gen4 port and is intended for D3-D7." Type="Variable" Display="advanced-hide" Required="true" Mask="false">False</Config>
+  <Config Name="mDNS discovery" Target="MDNS_ENABLED" Default="False" Mode="" Description="Disabled for bridge networking. Enter the Unraid LAN URL manually in the installer." Type="Variable" Display="advanced-hide" Required="true" Mask="false">False</Config>
+  <Config Name="Container bind address" Target="HOST_IP" Default="0.0.0.0" Mode="" Description="Listen on interfaces inside the container. Keep 0.0.0.0 with bridge networking; do not enter the Unraid LAN IP here." Type="Variable" Display="advanced-hide" Required="true" Mask="false">0.0.0.0</Config>
+  <TemplateURL>https://raw.githubusercontent.com/Desadius/unraid-vacuula/main/templates/vacuula.xml</TemplateURL>
+</Container>

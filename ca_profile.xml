@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommunityApplications>
+  <Profile>Desadius community Unraid template for the official Vacuula backend, configured for Neato Botvac D3-D7. The template follows the upstream beta channel and displays the beta and backup notices before installation. Report Unraid template issues at https://github.com/Desadius/unraid-vacuula/issues. Upstream robot and application support: https://github.com/vacuula/vacuula. This repository is independent of the upstream Vacuula project.</Profile>
+  <Icon>https://raw.githubusercontent.com/vacuula/vacuula/e10c27e1130a4c2417cd9810841edea73ade2250/app/public/icons/icon-vacuula-512.png</Icon>
+  <WebPage>https://github.com/Desadius/unraid-vacuula</WebPage>
+</CommunityApplications>
